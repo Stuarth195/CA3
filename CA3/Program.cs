@@ -1,40 +1,47 @@
 ﻿using System;
-using EstructuraDeDatos;
 using EstructuraDeDatosI;
+
 class Program
 {
     static void Main()
     {
-        // Prueba de ColaLista
-        Console.WriteLine("=== Prueba ColaLista ===");
-        ColaLista<int> colaLista = new ColaLista<int>();
+        // Crear un arreglo de colas con capacidad para 3 colas
+        Arreglo<ColaArreglo<string>> arregloDeColas = new Arreglo<ColaArreglo<string>>(3);
 
-        colaLista.Encolar(10);
-        colaLista.Encolar(20);
-        colaLista.Encolar(30);
+        // Agregar colas al arreglo
+        for (int i = 0; i < 3; i++)
+        {
+            ColaArreglo<string> nuevaCola = new ColaArreglo<string>(3); // Cada cola puede tener 3 elementos
+            arregloDeColas.Agregar(nuevaCola);
+        }
 
-        colaLista.MostrarCola(); // Frente -> [10] -> [20] -> [30] -> Final
+        // Encolar elementos en cada cola
+        arregloDeColas.Obtener(0).Encolar("A1");
+        arregloDeColas.Obtener(0).Encolar("A2");
+        arregloDeColas.Obtener(0).Encolar("A3");
 
-        Console.WriteLine($"Desencolado: {colaLista.Desencolar()}"); // 10
-        colaLista.MostrarCola(); // Frente -> [20] -> [30] -> Final
+        arregloDeColas.Obtener(1).Encolar("B1");
+        arregloDeColas.Obtener(1).Encolar("B2");
+        arregloDeColas.Obtener(1).Encolar("B3");
 
-        Console.WriteLine($"Frente: {colaLista.FrenteElemento()}"); // 20
-        Console.WriteLine($"Tamaño: {colaLista.Tamano()}"); // 2
+        arregloDeColas.Obtener(2).Encolar("C1");
+        arregloDeColas.Obtener(2).Encolar("C2");
+        arregloDeColas.Obtener(2).Encolar("C3");
 
-        // Prueba de ColaArreglo
-        Console.WriteLine("\n=== Prueba ColaArreglo ===");
-        ColaArreglo<int> colaArreglo = new ColaArreglo<int>(5); // Capacidad de 5
+        // Mostrar todo el contenido del arreglo de colas
+        Console.WriteLine("Contenido del arreglo de colas:");
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write($"Cola {i + 1}: ");
+            arregloDeColas.Obtener(i).MostrarCola();
+        }
 
-        colaArreglo.Encolar(10);
-        colaArreglo.Encolar(20);
-        colaArreglo.Encolar(30);
+        Console.WriteLine();
 
-        colaArreglo.MostrarCola(); // Frente -> [10] -> [20] -> [30] -> Final
-
-        Console.WriteLine($"Desencolado: {colaArreglo.Desencolar()}"); // 10
-        colaArreglo.MostrarCola(); // Frente -> [20] -> [30] -> Final
-
-        Console.WriteLine($"Frente: {colaArreglo.FrenteElemento()}"); // 20
-        Console.WriteLine($"Tamaño: {colaArreglo.Tamano()}"); // 2
+        // Obtener y mostrar una cola específica
+        int indice = 1; // Cambia este número para probar con otra lista (0, 1 o 2)
+        Console.WriteLine($"Mostrando la cola en la posición {indice}:");
+        ColaArreglo<string> colaObtenida = arregloDeColas.Obtener(indice);
+        colaObtenida.MostrarCola();
     }
 }
