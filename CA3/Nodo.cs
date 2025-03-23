@@ -1,15 +1,11 @@
-﻿using System;
-
-namespace EstructuraDeDatos
+﻿public class NodoLista<T>
 {
-    public class Nodo<T>
+    public T Dato { get; set; } // Almacena el valor del nodo
+    public NodoLista<T> Siguiente { get; set; } // Apunta al siguiente nodo en la lista
+
+    public NodoLista(T dato)
     {
-            public T Dato { get; set; }
-            public Nodo<T> Siguiente { get; set; }
-        public Nodo(T dato)
-        {
-            Dato = dato;
-            Siguiente = null;
-        }
+        this.Dato = dato;
+        this.Siguiente = null; // Inicialmente, no apunta a nada
     }
 }
